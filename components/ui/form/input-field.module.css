@@ -1,0 +1,11 @@
+.input:not(:placeholder-shown) {
+  padding-top: 12px;
+  padding-bottom: 10px;
+}
+
+.input:not(:placeholder-shown) ~ label {
+  color: #838485;
+  top: 0;
+  transform: translateY(0);
+  font-size: 0.625rem;
+}
