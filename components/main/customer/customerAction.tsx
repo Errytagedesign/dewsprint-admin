@@ -55,7 +55,7 @@ export const CustomerAction = ({ data }: { data: CustomerType }) => {
             <Button
               link
               href={`/riders/${data?.name}?id=${data?.id}`}
-              className="pry-btn w-full !px-3 !py-2"
+              className="sec-btn w-full !px-3 !py-2"
             >
               <BsEye /> View
             </Button>
@@ -70,7 +70,7 @@ export const CustomerAction = ({ data }: { data: CustomerType }) => {
               </Button>
             ) : (
               <Button
-                className="sec-btn w-full !px-3 !py-2"
+                className="pry-btn w-full !px-3 !py-2"
                 onClick={() => openModal(`reinstate-${data?.id}`)}
               >
                 <LuUserCheck /> Reinstate

@@ -55,7 +55,7 @@ export const RiderAction = ({ data }: { data: RidersType }) => {
             <Button
               link
               href={`/riders/${data?.name}?id=${data?.id}`}
-              className="pry-btn w-full !px-3 !py-2"
+              className="sec-btn w-full !px-3 !py-2"
             >
               <BsEye /> View
             </Button>
@@ -70,7 +70,7 @@ export const RiderAction = ({ data }: { data: RidersType }) => {
               </Button>
             ) : (
               <Button
-                className="sec-btn w-full !px-3 !py-2"
+                className="pry-btn w-full !px-3 !py-2"
                 onClick={() => openModal(`reinstate-${data?.id}`)}
               >
                 <LuUserCheck /> Reinstate
@@ -155,33 +155,33 @@ export const RiderDocsAction = ({ data }: { data: RiderDocsType }) => {
               href={data?.documentUrl}
               target="_blank"
               rel="noreferrer"
-              className="pry-btn btn w-full !px-3 !py-2"
+              className="sec-btn btn w-full !px-3 !py-2"
             >
               <BsEye /> View
             </a>
           </li>
 
-          <>
-            {isApproved ? (
+          {!isApproved && (
+            <>
               <li>
                 <Button
                   className="delete-btn w-full !px-3 !py-2"
                   onClick={() => openModal(`suspend-${data?.id}`)}
                 >
-                  <LuUserX /> Suspend
+                  Reject
                 </Button>
               </li>
-            ) : (
+
               <li>
                 <Button
-                  className="delete-btn w-full !px-3 !py-2"
+                  className="pry-btn w-full !px-3 !py-2"
                   onClick={() => openModal(`suspend-${data?.id}`)}
                 >
-                  <LuUserX /> Suspend
+                  Approve
                 </Button>
               </li>
-            )}
-          </>
+            </>
+          )}
         </ul>
       </PopoverWrapper>
 

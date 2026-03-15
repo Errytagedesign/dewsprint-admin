@@ -201,7 +201,7 @@ export const riderDocsColData: Column<
   },
   {
     title: "Date Reviewed",
-    key: "createdAt",
+    key: "reviewedAt",
     render: (_, { reviewedAt }) => <TableDate date={reviewedAt} />,
   },
 
