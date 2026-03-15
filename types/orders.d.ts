@@ -13,11 +13,8 @@ export type OrderTypes =
   | "airtime"
   | "subscriptions";
 
-export type AllAssets = Order | ITransaction | SubscriptionProps;
-
 export type OrdersSearchParams = {
-  userId?: string;
-  customerId?: string;
+  id?: string;
   page: string;
   search: string;
   status: string;

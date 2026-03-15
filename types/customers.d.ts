@@ -66,7 +66,7 @@ export type CustomerStatRspProps = ApiResponse & {
 };
 
 export type CustomerByIdRspProps = ApiResponse & {
-  customer: Customer;
+  data: { user: CustomerType };
 };
 
 export type FundWalletTypes = {

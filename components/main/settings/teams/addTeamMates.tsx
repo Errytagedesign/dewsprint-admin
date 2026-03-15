@@ -2,7 +2,7 @@
 import Button from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import InputField from "@/components/ui/form/input-field";
-import ModalWrapper from "@/components/ui/modals/ModalWrapper";
+import ModalWrapper from "@/components/ui/modals/modalWrappers";
 import { SelectInput } from "@/components/ui/select/SelectInput";
 import { useModalContext } from "@/context/modalContext";
 import { addTeamMatesAction } from "@/libs/actions/settings.action";

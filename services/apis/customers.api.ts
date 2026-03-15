@@ -30,12 +30,28 @@ export const getCustomerStatsApi = () => {
 };
 
 export const getCustomerByIdApi = (userId: string) => {
-  return Api.get<CustomerByIdRspProps>(`/customers/${userId}`, true);
+  return Api.get<CustomerByIdRspProps>(`/admin/users/${userId}`, true);
 };
 
-export const restrictCustomerApi = (userId: string) => {
+export const suspendCustomersApi = (userId: string) => {
   return Api.patch<undefined, ApiResponse & { data: CustomerType }>(
-    `/users/${userId}/restrict`,
+    `/admin/users/${userId}/suspend`,
+    undefined,
+    true,
+  );
+};
+
+export const unsuspendCustomersApi = (userId: string) => {
+  return Api.patch<undefined, ApiResponse & { data: CustomerType }>(
+    `/admin/users/${userId}/unsuspend`,
+    undefined,
+    true,
+  );
+};
+
+export const deleteCustomerApi = (userId: string) => {
+  return Api.delete<undefined, ApiResponse & { data: CustomerType }>(
+    `/admin/users/${userId}`,
     undefined,
     true,
   );

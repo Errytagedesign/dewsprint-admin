@@ -1,12 +1,15 @@
-import CustomerProfile from "@/components/main/customer/customerProfile";
+import { RiderDocsAction } from "@/components/main/riders/riderAction";
+import RiderProfile from "@/components/main/riders/riderProfile";
+import { DocumentsTable } from "@/components/main/riders/riderTable";
 import { ErrorUI } from "@/components/ui/emptyUI";
 import GoBackBtn from "@/components/ui/goBackBtn";
-import TableLoading from "@/components/ui/skeleton/tableLoading";
-import { getCustomerByIdApi } from "@/services/apis/customers.api";
-import { CustomerType } from "@/types/customers";
+import {
+  getRiderDocumentsApi,
+  getRidersByIdApi,
+} from "@/services/apis/riders.api";
 import { OrdersSearchParams } from "@/types/orders";
 import { Metadata } from "next";
-import React, { Suspense } from "react";
+import React from "react";
 
 export const generateMetadata = async ({
   params,
@@ -27,15 +30,19 @@ export default async function page({
 }) {
   const param = await searchParams;
 
-  const rsp = await getCustomerByIdApi(param?.id!);
+  const [riderRsp, docsRsp] = await Promise.all([
+    getRidersByIdApi(param?.id!),
+    getRiderDocumentsApi(param?.id!),
+  ]);
 
-  if (!rsp?.ok) {
-    const { message, code } = rsp?.body;
+  if (!riderRsp?.ok || !docsRsp?.ok) {
+    const { message, code } = riderRsp?.body || docsRsp?.body;
 
     return <ErrorUI code={code} message={message} className="min-h-[70vh]" />;
   }
 
-  const customerData = rsp?.body?.data?.user;
+  const riderData = riderRsp?.body?.data?.rider;
+  const riderDocs = docsRsp?.body?.data?.documents;
 
   return (
     <main className="flex flex-col gap-3">
@@ -43,8 +50,10 @@ export default async function page({
         <GoBackBtn />
       </header>
 
-      <section className="flex flex-wrap gap-4">
-        <CustomerProfile user={customerData} />
+      <RiderProfile rider={riderData} />
+
+      <section className="roundedCard flex-1 p-4">
+        <DocumentsTable data={riderDocs} />
       </section>
     </main>
   );

@@ -5,9 +5,9 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "../dialog";
-import { useModalContext } from "@/context/modalContext";
+} from "./dialog";
 import { cn } from "@/libs/utils";
+import { useModalContext } from "@/context/modalContext";
 
 type IModal = {
   subtitleClass: string;
@@ -16,14 +16,14 @@ type IModal = {
   wrapperClass: string;
   id: string;
   icon: ReactNode;
-  title: string;
+  title: string | ReactNode;
   subtitle: string;
   children: ReactNode;
   openModals: { [key: string]: boolean };
   modalAction: (id: string) => void;
 };
 
-const ModalWrapper = ({
+export const ModalWrappers = ({
   id,
   icon,
   title,
@@ -43,22 +43,23 @@ const ModalWrapper = ({
         onOpenChange={(isOpen) => !isOpen && closeModal(String(id))}
       >
         <DialogContent
-          className={cn("!border-0 bg-white sm:max-w-[402px]", wrapperClass)}
+          className={cn(
+            "space-y-5 border-0! bg-white px-0! sm:max-w-[402px]",
+            wrapperClass,
+          )}
         >
           {icon}
 
-          <DialogHeader className={headerClass}>
+          <DialogHeader className={`${headerClass} px-4`}>
             <DialogTitle className={titleClass}>{title}</DialogTitle>
             <DialogDescription className={subtitleClass}>
               {subtitle}
             </DialogDescription>
           </DialogHeader>
 
-          {children}
+          <div className="px-4">{children}</div>
         </DialogContent>
       </Dialog>
     </div>
   );
 };
-
-export default ModalWrapper;

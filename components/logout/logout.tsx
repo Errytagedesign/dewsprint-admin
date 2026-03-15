@@ -14,8 +14,9 @@ import {
 } from "../ui/dialog";
 import { useModal } from "@/hooks/useModal";
 import Button from "../ui/button";
+import Image from "next/image";
 
-const Logout = () => {
+export const Logout = () => {
   const { isOpen, closeModal, openModal } = useModal();
 
   return (
@@ -60,4 +61,10 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export const WarningIcon = () => {
+  return (
+    <figure className="flex justify-center">
+      <Image src="/images/warning.png" alt="" width={92} height={92} />
+    </figure>
+  );
+};

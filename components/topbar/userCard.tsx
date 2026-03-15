@@ -1,5 +1,5 @@
 import React from "react";
-import Logout from "../logout/logout";
+import { Logout } from "../logout/logout";
 import Image from "next/image";
 import { allImages } from "@/public/images/images";
 import { UserDataTypes } from "@/types/auth";

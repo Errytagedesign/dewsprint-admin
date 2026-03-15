@@ -7,7 +7,7 @@ const filterData = [
   { title: "All", value: "all" },
   { title: "Active", value: "active" },
   { title: "Inactive", value: "inactive" },
-  { title: "Suspend", value: "suspend" },
+  { title: "Suspended", value: "suspended" },
 ];
 const FilterTransactions = () => {
   const { filterValue, handleFilterUrl } = usePaginationContext();

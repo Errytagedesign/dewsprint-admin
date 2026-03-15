@@ -1,7 +1,7 @@
 import { useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { debouncer } from "@/utils/helpers";
-import { AllAssets } from "@/types/orders";
+import { AllAssets } from "@/types/global";
 
 export type UsePaginateData = {
   total: number;
@@ -68,11 +68,11 @@ export default function usePagination(data?: UsePaginateData) {
   };
 
   const handleFilterUrl = (query: string) => {
-    const currentSearch = searchParams.get("filter") || "";
+    const currentSearch = searchParams.get("status") || "";
 
     if (query !== currentSearch) {
       // Only update if the query has changed
-      const pageUrl = createSearchURL("filter", query);
+      const pageUrl = createSearchURL("status", query);
       startTransition(() => {
         replace(pageUrl);
       });

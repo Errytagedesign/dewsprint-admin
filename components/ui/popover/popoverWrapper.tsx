@@ -1,12 +1,17 @@
 import React from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { FaChevronDown } from "react-icons/fa6";
+import { cn } from "@/libs/utils";
 
 const PopoverWrapper = ({
   icon,
+  align = "center",
+  className,
   children,
 }: {
+  align?: "center" | "start" | "end";
   icon?: React.ReactNode;
+  className?: string;
   children: React.ReactNode;
 }) => {
   return (
@@ -17,7 +22,9 @@ const PopoverWrapper = ({
         </button>
       </PopoverTrigger>
 
-      <PopoverContent className="mr-5 bg-white">{children}</PopoverContent>
+      <PopoverContent className={cn("bg-white", className)} align={align}>
+        {children}
+      </PopoverContent>
     </Popover>
   );
 };

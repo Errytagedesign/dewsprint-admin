@@ -1,5 +1,15 @@
 import { ReactNode } from "react";
 import { StaticImageData } from "next/image";
+import { Order } from "./orders";
+import { ITransaction } from "./transactions";
+import { RidersType } from "./riders";
+import { CustomerType } from "./customers";
+
+export type AllAssets =
+  | Order[]
+  | ITransaction[]
+  | RidersType[]
+  | CustomerType[];
 
 export type SearchParams = {
   searchParams: Promise<{

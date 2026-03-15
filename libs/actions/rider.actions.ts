@@ -1,15 +1,15 @@
 "use server";
 
 import {
-  deleteCustomerApi,
-  suspendCustomersApi,
-  unsuspendCustomersApi,
-} from "@/services/apis/customers.api";
+  deleteRidersApi,
+  suspendRidersApi,
+  unsuspendRidersApi,
+} from "@/services/apis/riders.api";
 import { revalidatePath } from "next/cache";
 
-export const deleteCustomerAction = async (userId: string) => {
+export const deleteRidersAction = async (userId: string) => {
   try {
-    const rsp = await deleteCustomerApi(userId);
+    const rsp = await deleteRidersApi(userId);
 
     if (!rsp.ok) {
       return {
@@ -18,7 +18,7 @@ export const deleteCustomerAction = async (userId: string) => {
       };
     }
 
-    revalidatePath("/customers");
+    revalidatePath("/riders");
 
     return {
       error: false,
@@ -35,9 +35,9 @@ export const deleteCustomerAction = async (userId: string) => {
   }
 };
 
-export const suspendCustomersAction = async (userId: string) => {
+export const suspendRidersAction = async (userId: string) => {
   try {
-    const rsp = await suspendCustomersApi(userId);
+    const rsp = await suspendRidersApi(userId);
 
     if (!rsp.ok) {
       return {
@@ -63,9 +63,9 @@ export const suspendCustomersAction = async (userId: string) => {
   }
 };
 
-export const unsuspendCustomerAction = async (userId: string) => {
+export const unsuspendRidersAction = async (userId: string) => {
   try {
-    const rsp = await unsuspendCustomersApi(userId);
+    const rsp = await unsuspendRidersApi(userId);
 
     if (!rsp.ok) {
       return {

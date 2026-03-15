@@ -1,3 +1,4 @@
+import { cn } from "@/libs/utils";
 import { ReactNode } from "react";
 
 const Field = ({
@@ -10,7 +11,7 @@ const Field = ({
   className?: string;
 }) => {
   return (
-    <div className={className}>
+    <div className={cn("flex items-center justify-between", className)}>
       <h5 className="text-grey-800 w-3/12 text-sm">{title}</h5>
       <div className="flex flex-1 justify-end">
         {typeof subtitle === "string" ? (

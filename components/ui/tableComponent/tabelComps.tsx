@@ -18,9 +18,9 @@ export const TableID = ({ id }: { id: string }) => {
 export const TableStatus = ({ status }: { status: string }) => {
   return (
     <p
-      className={`${getStatusColors(status)} flex w-fit items-center justify-center gap-1`}
+      className={`${getStatusColors(status)} flex w-fit items-center justify-center gap-1 capitalize`}
     >
-      {status}
+      {status?.toLowerCase()}
     </p>
   );
 };

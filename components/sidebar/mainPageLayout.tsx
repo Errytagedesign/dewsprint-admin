@@ -9,7 +9,7 @@ export default function MainPageLayout({ children }: { children: ReactNode }) {
       <RenderSidebar />
       <article className="w-full space-y-2 lg:w-[81%]">
         <TopBar />
-        <div className="custom-scrollbar h-[calc(100vh-var(--main-header-height))] w-full overflow-y-auto">
+        <div className="custom-scrollbar min-h-[calc(100vh-var(--main-header-height))] w-full overflow-y-auto">
           {children}
         </div>
       </article>

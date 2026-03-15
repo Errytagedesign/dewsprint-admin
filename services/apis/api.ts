@@ -139,7 +139,7 @@ export class Api {
     const headers = await this.getHeaders({ auth, customHeader });
     const body = this.getRequestBody(options, headers);
 
-    console.log({ url: base_url + options.url });
+    // console.log({ url: base_url + options.url });
 
     try {
       const response = await fetch(base_url + options.url, {

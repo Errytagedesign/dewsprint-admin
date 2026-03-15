@@ -5,9 +5,9 @@ import {
   OrderSumRsp,
   ReloadlyBalRsp,
   SMSPoolBalRsp,
-} from "@/types/dashboard.types";
+} from "@/types/dashboard";
 import { Api } from "./api";
-import { CustomerStatRspProps } from "@/types/customers.types";
+import { CustomerStatRspProps } from "@/types/customers";
 
 export const getOrderSummaryApi = () => {
   return Api.get<OrderSumRsp>(`/orders/active-summary-by-type`, true);

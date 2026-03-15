@@ -1,5 +1,5 @@
 "use client";
-import ModalWrapper from "@/components/ui/modals/ModalWrapper";
+import ModalWrapper from "@/components/ui/modals/modalWrappers";
 import React from "react";
 import DetailHeader from "../orders/detailsModal/detailHeader";
 import CopyToClipboardBtn from "@/components/ui/copyToClipboard";

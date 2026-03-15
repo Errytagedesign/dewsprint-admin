@@ -25,6 +25,7 @@ export type UpdatePasswordTypes = {
 export type ApiResponse = {
   success: boolean;
   statusCode?: number;
+  code: number;
   message: string;
 };
 
