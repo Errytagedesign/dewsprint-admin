@@ -1,10 +1,10 @@
-import { ApiResponse } from "@/types/auth.types";
+import { ApiResponse } from "@/types/auth";
 import { Api } from "./api";
 import {
   AddTeamMatesProps,
   GetTeamsRsp,
   UpdateUserRsp,
-} from "@/types/settings.types";
+} from "@/types/settings";
 
 export const updateCurrentUserApi = (body: FormData) => {
   return Api.patch<FormData, UpdateUserRsp>("/users/profile", body, true);

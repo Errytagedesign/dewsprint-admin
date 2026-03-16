@@ -1,5 +1,5 @@
 "use client";
-import { AllAssets } from "@/types/orders.types";
+import { AllAssets } from "@/types/global";
 import { useState } from "react";
 export const useModal = () => {
   const [isOpen, setIsOpen] = useState<{ [key: string]: boolean }>({});

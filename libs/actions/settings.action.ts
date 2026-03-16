@@ -5,8 +5,8 @@ import {
   deleteTeamMatesApi,
   updateCurrentUserApi,
 } from "@/services/apis/settings.api";
-import { ActionFormStatus } from "@/types/global.types";
-import { AddTeamMatesProps } from "@/types/settings.types";
+import { ActionFormStatus } from "@/types/global";
+import { AddTeamMatesProps } from "@/types/settings";
 import { revalidatePath } from "next/cache";
 
 export const updateCurrentUserAction = async (

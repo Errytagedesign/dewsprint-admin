@@ -5,7 +5,7 @@ import React, { useActionState, useEffect, useState } from "react";
 import InputField from "../ui/form/input-field";
 import Button from "../ui/button";
 import StrongPassword from "../ui/strongPassword";
-import { ActionFormStatus } from "@/types/global.types";
+import { ActionFormStatus } from "@/types/global";
 import { passwordResetAction } from "@/libs/actions/auth.actions";
 import { handleError, handleSuccess } from "@/utils/helpers";
 import { useAuthContext } from "@/context/authContext";

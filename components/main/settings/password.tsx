@@ -50,7 +50,7 @@ const Password = () => {
           password: formData?.password,
           oldPassword: formData?.oldPassword,
         };
-        const rsp = await currentUserUpdatePasswordAction(payload);
+        const rsp = await currentUserUpdatePasswordAction(payload as any);
         if (rsp?.error) {
           handleError(rsp?.message);
         } else {

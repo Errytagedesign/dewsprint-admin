@@ -1,12 +1,10 @@
 import CustomerProfile from "@/components/main/customer/customerProfile";
 import { ErrorUI } from "@/components/ui/emptyUI";
 import GoBackBtn from "@/components/ui/goBackBtn";
-import TableLoading from "@/components/ui/skeleton/tableLoading";
 import { getCustomerByIdApi } from "@/services/apis/customers.api";
-import { CustomerType } from "@/types/customers";
 import { OrdersSearchParams } from "@/types/orders";
 import { Metadata } from "next";
-import React, { Suspense } from "react";
+import React from "react";
 
 export const generateMetadata = async ({
   params,
@@ -27,7 +25,7 @@ export default async function page({
 }) {
   const param = await searchParams;
 
-  const rsp = await getCustomerByIdApi(param?.id!);
+  const rsp = await getCustomerByIdApi(param?.id as string);
 
   if (!rsp?.ok) {
     const { message, code } = rsp?.body;

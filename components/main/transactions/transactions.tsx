@@ -10,7 +10,7 @@ export default async function Transactions({
 }: {
   params: OrdersSearchParams;
 }) {
-  const { page, search, status } = params;
+  const { page, status } = params;
 
   const rsp = await getTransactionsApi({
     page: page || "1",

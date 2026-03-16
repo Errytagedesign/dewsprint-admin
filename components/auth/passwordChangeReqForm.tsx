@@ -7,8 +7,8 @@ import Button from "../ui/button";
 import { useRouter } from "next/navigation";
 import { forgotPasswordRequestAction } from "@/libs/actions/auth.actions";
 import { useAuthContext } from "@/context/authContext";
-import { ActionFormStatus } from "@/types/global.types";
-import { UserDataAndAccessToken } from "@/types/auth.types";
+import { ActionFormStatus } from "@/types/global";
+import { UserDataAndAccessToken } from "@/types/auth";
 import { handleError, handleSuccess } from "@/utils/helpers";
 
 const PasswordChangeReqForm = () => {

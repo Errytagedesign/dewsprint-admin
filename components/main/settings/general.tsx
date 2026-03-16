@@ -1,8 +1,8 @@
 import React from "react";
 import { GeneralForm } from "./generalForm";
-import { UserData } from "@/types/auth.types";
+import { UserDataTypes } from "@/types/auth";
 
-const General = ({ userData }: { userData: UserData }) => {
+const General = ({ userData }: { userData: UserDataTypes }) => {
   return (
     <section>
       <header>

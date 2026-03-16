@@ -5,18 +5,18 @@ import { updateCurrentUserAction } from "@/libs/actions/settings.action";
 import { cn } from "@/libs/utils";
 import { allImages } from "@/public/images/images";
 import { UploadIcon } from "@/public/svgs/svgs";
-import { UserData } from "@/types/auth.types";
-import { ActionFormStatus } from "@/types/global.types";
+import { UserDataTypes } from "@/types/auth";
+import { ActionFormStatus } from "@/types/global";
 import { handleError, handleSuccess } from "@/utils/helpers";
 import Image from "next/image";
 import React, { useActionState, useEffect, useState } from "react";
 
-export const GeneralForm = ({ userData }: { userData: UserData }) => {
+export const GeneralForm = ({ userData }: { userData: UserDataTypes }) => {
   const [formData, setFormData] = useState<{
     fullName: string;
     file: File | null;
   }>({
-    fullName: userData?.fullName ?? "",
+    fullName: userData?.name ?? "",
     file: null,
   });
   const [toggle, setToggle] = useState(false);
@@ -53,7 +53,7 @@ export const GeneralForm = ({ userData }: { userData: UserData }) => {
           <article className="flex flex-1 items-center gap-3">
             <figure className="relative !size-20 overflow-hidden rounded-full">
               <Image
-                src={userData?.imageUrl ?? allImages.noAvatar}
+                src={userData?.profilePhotoUrl ?? allImages.noAvatar}
                 alt=""
                 className="object-cover"
                 fill

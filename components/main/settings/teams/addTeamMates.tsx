@@ -2,11 +2,11 @@
 import Button from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import InputField from "@/components/ui/form/input-field";
-import ModalWrapper from "@/components/ui/modals/modalWrappers";
+import { ModalWrappers } from "@/components/ui/modals/modalWrappers";
 import { SelectInput } from "@/components/ui/select/SelectInput";
 import { useModalContext } from "@/context/modalContext";
 import { addTeamMatesAction } from "@/libs/actions/settings.action";
-import { ActionFormStatus } from "@/types/global.types";
+import { ActionFormStatus } from "@/types/global";
 import { handleError, handleSuccess } from "@/utils/helpers";
 import React, { useActionState, useEffect } from "react";
 
@@ -46,7 +46,7 @@ export const AddTeamMates = ({ role }: { role: string }) => {
       </article>
 
       {isOpen["add"] && (
-        <ModalWrapper
+        <ModalWrappers
           id="add"
           title="Add Member"
           titleClass="!text-lg !font-medium text-center"
@@ -80,7 +80,7 @@ export const AddTeamMates = ({ role }: { role: string }) => {
               </Button>
             </DialogFooter>
           </form>
-        </ModalWrapper>
+        </ModalWrappers>
       )}
     </>
   );

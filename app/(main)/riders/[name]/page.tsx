@@ -1,4 +1,3 @@
-import { RiderDocsAction } from "@/components/main/riders/riderAction";
 import RiderProfile from "@/components/main/riders/riderProfile";
 import { DocumentsTable } from "@/components/main/riders/riderTable";
 import { ErrorUI } from "@/components/ui/emptyUI";
@@ -31,8 +30,8 @@ export default async function page({
   const param = await searchParams;
 
   const [riderRsp, docsRsp] = await Promise.all([
-    getRidersByIdApi(param?.id!),
-    getRiderDocumentsApi(param?.id!),
+    getRidersByIdApi(param?.id as string),
+    getRiderDocumentsApi(param?.id as string),
   ]);
 
   if (!riderRsp?.ok || !docsRsp?.ok) {

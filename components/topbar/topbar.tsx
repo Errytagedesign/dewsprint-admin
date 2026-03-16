@@ -1,4 +1,3 @@
-import { NotifIcon } from "@/public/svgs/svgs";
 import Image from "next/image";
 import { allImages } from "@/public/images/images";
 import PopoverWrapper from "../ui/popover/popoverWrapper";
