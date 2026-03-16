@@ -99,11 +99,6 @@ export const customerColData: Column<CustomerType & { actions?: ReactNode }>[] =
       key: "email",
       render: (_, record) => <>{record?.email}</>,
     },
-    {
-      title: "Role",
-      key: "role",
-      render: (_, record) => <>{record?.role}</>,
-    },
 
     {
       title: "Phone Number",

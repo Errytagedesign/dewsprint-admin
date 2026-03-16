@@ -15,7 +15,7 @@ export default async function Orders({
   const rsp = await getOrdersByType({
     page: page || "1",
     status: status as OrderStatusType,
-    trackingCode: search,
+    search,
   });
 
   if (!rsp?.ok) {

@@ -1,3 +1,5 @@
+"use client";
+
 import { WarningIcon } from "@/components/logout/logout";
 import Button from "@/components/ui/button";
 import ActionModals from "@/components/ui/modals/actionModals";

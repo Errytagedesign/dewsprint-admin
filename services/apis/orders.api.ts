@@ -14,16 +14,14 @@ export const getOrdersByType = ({
   page = "1",
   limit = "10",
   search,
-  trackingCode,
 }: {
   status: OrderStatusType;
   page?: string;
   limit?: string;
   search?: string;
-  trackingCode?: string;
 }) => {
   return Api.get<OrderResponse>(
-    `/admin/orders?${queryBuilder({ page, limit, status, search: String(search), trackingCode: String(trackingCode) })}`,
+    `/admin/orders?${queryBuilder({ page, limit, status, search: String(search) })}`,
     true,
   );
 };
