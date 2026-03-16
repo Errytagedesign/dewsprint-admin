@@ -1,17 +1,21 @@
+import { UserDataTypes } from "./auth";
 import { ApiResponse } from "./auth.types";
 import { Customer } from "./customers.types";
 import { SubscriptionProps } from "./subscriptions.types";
 import { ITransaction } from "./transactions.types";
 
-export type OrderTypes =
-  | "phone_number"
-  | "sms_request"
-  | "esim"
-  | "boosts"
-  | "gift_card"
-  | "sms"
-  | "airtime"
-  | "subscriptions";
+export type OrderStatusType =
+  | "PENDING"
+  | "ASSIGNED"
+  | "ACCEPTED"
+  | "ARRIVED"
+  | "PICKED_UP"
+  | "IN_TRANSIT"
+  | "DELIVERED"
+  | "COMPLETED"
+  | "CANCELLED";
+
+export type PaymentStatusType = "PENDING" | "PAID" | "REFUNDED" | "FAILED";
 
 export type OrdersSearchParams = {
   id?: string;
@@ -39,72 +43,38 @@ export type Transaction = {
   updated_date: string;
 };
 
-export type GiftCardCodesProps = { cardNumber: string; pin: string };
-
-export type OrderProps = {
+export type OrderType = {
   id: string;
-  type: string;
+  city: { id: string; name: string };
+  trackingCode: string;
   status: string;
-  amount: string;
-  discount: number;
-  providerOrderId: string;
-  country: string;
-  countryCode: string;
-  countryInitial: string;
-  providerResponse: null;
-  providerTransactionId: string;
-  link: string;
-  description: string;
-  productId: string;
-  logoUrl: string;
-  giftCardCodes: GiftCardCodesProps[];
-  metadata: {
-    name: string;
-    category: string;
-    type: string;
-  } | null;
-  created_date: string;
+  paymentStatus: PaymentStatusType;
+  paymentMethod: string;
+  user: UserDataTypes;
+  rider: UserDataTypes;
+  totalFee: number;
   createdAt: string;
-  updatedAt: string;
-  name: string;
-  service: string;
-  phoneNumber: string;
-  dataPlan: string;
-  activationCode: string;
-  coverage: string;
-  validity: number;
-  pin: string;
-  puk: string;
-  code: string | null;
-  dataLeft: string;
-  information: string;
-  qrCode: string;
-  serviceDetails: string;
-  quantity: number;
-  recipientEmail: string;
-  recipientName: string;
-  operatorLogoUrl: string;
-  recipientPhone: string;
-  operatorName: string;
-  balance: string;
-};
-
-export type Order = OrderProps & {
-  customer: Customer;
-  transaction: Transaction;
-  subscription: SubscriptionProps;
 };
 
 export type OrderResponse = ApiResponse & {
   data: {
-    currentPage: number;
-    pageSize: number;
-    totalCount: number;
-    totalPages: number;
-    orders: Order[];
+    orders: OrderType[];
+    pagination: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPages: number;
+    };
   };
 };
 
 export type OrderByIdRsp = ApiResponse & {
-  oreder: Order;
+  data: { oreder: OrderType };
+};
+
+export type UpdateOrderStatusType = { status: OrderStatusType };
+
+export type ReassignOrderType = {
+  riderId: string;
+  reason: string;
 };

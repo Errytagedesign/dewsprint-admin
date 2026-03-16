@@ -47,26 +47,34 @@ export const getStatusColors = (status: string) => {
 
   if (
     [
+      "paid",
       "active",
       "approved",
-      "completed",
-      "successful",
-      "success",
-      "verified",
+      "accepted",
+      "in_transit",
       "confirmed",
-      "requested",
-      "activated",
+      "arrived",
+      "delivered",
     ].includes(statusLower)
   ) {
     return "success";
   }
 
   if (
-    ["declined", "failed", "rejected", "cancelled", "refunded"]?.includes(
-      statusLower,
-    )
+    [
+      "declined",
+      "failed",
+      "rejected",
+      "cancelled",
+      "failed",
+      "refunded",
+    ]?.includes(statusLower)
   ) {
     return "failed";
+  }
+
+  if (["completed"]?.includes(statusLower)) {
+    return "completed";
   }
 
   if (["pending", "processing"]?.includes(statusLower)) {

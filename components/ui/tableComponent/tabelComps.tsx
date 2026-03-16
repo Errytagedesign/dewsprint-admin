@@ -3,13 +3,13 @@
 import Image, { StaticImageData } from "next/image";
 import CopyToClipboardBtn from "../copyToClipboard";
 import { formatDate, formatTime, getStatusColors } from "@/utils/helpers";
-import { AllAssets } from "@/types/orders";
 import TableComponent, { Column } from "./tableComponent";
+import { AllAssets } from "@/types/global";
 
 export const TableID = ({ id }: { id: string }) => {
   return (
     <div className="flex items-center gap-1">
-      {id?.slice(0, 6)}...
+      {id?.slice(0, 10)}...
       <CopyToClipboardBtn id={id} valueToCopy={id} />
     </div>
   );

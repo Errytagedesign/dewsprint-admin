@@ -25,6 +25,8 @@ import {
   RiderAction,
   RiderDocsAction,
 } from "@/components/main/riders/riderAction";
+import { OrderType } from "@/types/orders";
+import { OrdersAction } from "@/components/main/orders/ordersAction";
 
 export const transactionColData: Column<ITransaction>[] = [
   {
@@ -78,11 +80,6 @@ export const transactionColData: Column<ITransaction>[] = [
 
 export const customerColData: Column<CustomerType & { actions?: ReactNode }>[] =
   [
-    {
-      title: "ID",
-      key: "id",
-      render: (_, record) => <TableID id={record?.id} />,
-    },
     {
       title: "Name",
       key: "name",
@@ -235,5 +232,65 @@ export const teamsColData: Column<UserDataTypes & { action?: string }>[] = [
     title: "Actions",
     key: "action",
     render: (_, record) => <TeamsAction user={record} />,
+  },
+];
+
+export const ordersColData: Column<OrderType & { actions?: ReactNode }>[] = [
+  {
+    title: "Customer",
+    key: "user",
+    render: (_, record) => (
+      <FileImage
+        url={record?.user?.profilePhotoUrl as string}
+        userName={record?.user?.name}
+        email={record?.user?.email}
+      />
+    ),
+  },
+  {
+    title: "Rider",
+    key: "rider",
+    render: (_, record) => (
+      <>
+        {!record?.rider ? (
+          <p>Rider not assigned, yet.</p>
+        ) : (
+          <FileImage
+            url={record?.rider?.profilePhotoUrl as string}
+            userName={record?.rider?.name}
+            email={record?.rider?.email}
+          />
+        )}
+      </>
+    ),
+  },
+
+  {
+    title: "Tracking ID",
+    key: "trackingCode",
+    render: (_, record) => <TableID id={record?.trackingCode} />,
+  },
+
+  {
+    title: "Status",
+    key: "status",
+    render: (_, { status }) => <TableStatus status={status} />,
+  },
+
+  {
+    title: "Payment Status",
+    key: "paymentStatus",
+    render: (_, { paymentStatus }) => <TableStatus status={paymentStatus} />,
+  },
+  {
+    title: "Date",
+    key: "createdAt",
+    render: (_, { createdAt }) => <TableDate date={createdAt} />,
+  },
+
+  {
+    title: "Actions",
+    key: "actions",
+    render: (_, record) => <OrdersAction data={record} />,
   },
 ];

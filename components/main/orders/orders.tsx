@@ -1,79 +1,38 @@
 import { getOrdersByType } from "@/services/apis/orders.api";
 import React from "react";
-import TableWrapper from "./table/tableWrapper";
-import { OrdersSearchParams, OrderTypes } from "@/types/orders.types";
-import OrdersLayout from "../../pageLayout";
-import EmptyState from "@/components/ui/emptyUI";
-
-type OrdersLayout = {
-  pageTitle: string;
-  type: OrderTypes;
-  params: OrdersSearchParams;
-};
+import { OrdersSearchParams, OrderStatusType } from "@/types/orders";
+import { ErrorUI } from "@/components/ui/emptyUI";
+import OrdersLayout from "./ordersLayout";
+import { OrderTable } from "./orderTable";
 
 export default async function Orders({
   params,
-  type,
-  pageTitle,
-}: OrdersLayout) {
-  const { page, search } = params;
-  const rsp = await getOrdersByType({ page: Number(page) || 1, type, search });
+}: {
+  params: OrdersSearchParams;
+}) {
+  const { page, search, status } = params;
 
-  // console.log("rsp>>", rsp?.body?.data);
+  const rsp = await getOrdersByType({
+    page: page || "1",
+    status: status as OrderStatusType,
+    trackingCode: search,
+  });
 
   if (!rsp?.ok) {
-    const { message, description } = rsp?.body;
-
-    return (
-      <OrdersLayout pageTitle={pageTitle}>
-        <EmptyState
-          title={message}
-          subTitle={description}
-          className="min-h-[70vh]"
-        />
-      </OrdersLayout>
-    );
+    const { message, code } = rsp?.body;
+    return <ErrorUI code={code} message={message} className="min-h-[70vh]" />;
   }
 
-  const { pageSize, totalCount, totalPages, orders } = rsp?.body?.data;
+  const { pagination, orders } = rsp?.body?.data;
 
   const data = {
-    pageSize,
-    totalCount,
-    totalPages,
+    ...pagination,
     assets: orders,
   };
 
-  if (search && totalCount === 0) {
-    return (
-      <OrdersLayout pageTitle={pageTitle}>
-        <EmptyState
-          title="No result"
-          subTitle={
-            <>
-              No result found for: <b>{search}</b>{" "}
-            </>
-          }
-          className="min-h-[70vh]"
-        />
-      </OrdersLayout>
-    );
-  }
-  if (totalCount === 0) {
-    return (
-      <OrdersLayout pageTitle={pageTitle}>
-        <EmptyState
-          title={`No ${pageTitle} Datas`}
-          subTitle={`No data found for ${pageTitle}, your ${pageTitle} datas will appear here when they are available`}
-          className="min-h-[70vh]"
-        />
-      </OrdersLayout>
-    );
-  }
-
   return (
-    <OrdersLayout pageTitle={pageTitle} data={data}>
-      <TableWrapper title={pageTitle} type={type} containerClassName="mt-6" />
+    <OrdersLayout data={data}>
+      <OrderTable />
     </OrdersLayout>
   );
 }

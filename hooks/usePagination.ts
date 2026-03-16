@@ -19,6 +19,7 @@ export default function usePagination(data?: UsePaginateData) {
 
   const searchValue = searchParams.get("search")?.toString();
   const filterValue = searchParams.get("status")?.toString();
+  const payemtnFilterValue = searchParams.get("paymentStatus")?.toString();
 
   const currentPage = Number(searchParams.get("page") || "1");
   const totalPages = data?.totalPages || 0;
@@ -73,6 +74,18 @@ export default function usePagination(data?: UsePaginateData) {
     if (query !== currentSearch) {
       // Only update if the query has changed
       const pageUrl = createSearchURL("status", query);
+      startTransition(() => {
+        replace(pageUrl);
+      });
+    }
+  };
+
+  const handlePaymentFilterUrl = (query: string) => {
+    const filter = searchParams.get("paymentStatus") || "";
+
+    if (query !== filter) {
+      // Only update if the query has changed
+      const pageUrl = createSearchURL("paymentStatus", query);
       startTransition(() => {
         replace(pageUrl);
       });
@@ -139,5 +152,7 @@ export default function usePagination(data?: UsePaginateData) {
     searchValue,
     handleFilterUrl,
     filterValue,
+    payemtnFilterValue,
+    handlePaymentFilterUrl,
   };
 }

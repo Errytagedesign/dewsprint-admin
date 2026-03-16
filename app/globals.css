@@ -22,6 +22,9 @@
   --color-primary-15: #a5d9c2;
   --color-primary-25: #eaf7f1;
   --color-primary-50: #37be91;
+  --color-secondary: #1485f5;
+  --color-secondary-25: #e4f1ff;
+  --color-secondary-50: #a0d0ff;
   --color-black: #1b1818;
   --color-grey: #e5e5e5;
   --color-grey-5: #f9f9fb;
@@ -259,11 +262,16 @@
   @apply bg-warning-50 text-warning-400;
 }
 
+.completed {
+  @apply bg-secondary-25 text-secondary;
+}
+
 .fall-back {
   @apply bg-grey-100 text-grey-500;
 }
 
 .failed,
+.completed,
 .success,
 .warning,
 .fall-back {
