@@ -1,12 +1,12 @@
 import React from "react";
-import { PagesTabParams } from "@/types/global.types";
+import { PagesTabParams } from "@/types/global";
 import PageTabs from "@/components/ui/tabs/PageTabs";
 import General from "@/components/main/settings/general";
 import Password from "@/components/main/settings/password";
 import Teams from "@/components/main/settings/teams/teams";
 import { Metadata } from "next";
 import { getCurrentUserApi } from "@/services/apis/auth.api";
-import { UserDataTypes } from "@/types/auth.types";
+import { UserDataTypes } from "@/types/auth";
 
 export const metadata: Metadata = {
   title: "Settings",

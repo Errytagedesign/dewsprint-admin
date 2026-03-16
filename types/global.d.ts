@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { StaticImageData } from "next/image";
 import { Order, OrderType } from "./orders";
-import { ITransaction } from "./transactions";
+import { ITransaction, TransactionType } from "./transactions";
 import { RidersType } from "./riders";
 import { CustomerType } from "./customers";
 
@@ -9,7 +9,8 @@ export type AllAssets =
   | OrderType[]
   | ITransaction[]
   | RidersType[]
-  | CustomerType[];
+  | CustomerType[]
+  | TransactionType[];
 
 export type SearchParams = {
   searchParams: Promise<{
@@ -24,4 +25,11 @@ export type ActionFormStatus = {
 
 export type PagesTabParams = {
   searchParams: Promise<{ tab: string; page: string; search: string }>;
+};
+
+export type PaginationType = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
 };

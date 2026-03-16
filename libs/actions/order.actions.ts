@@ -12,6 +12,7 @@ export const reassignOrderByRiderIdAction = async (
   orderId: string,
   body: ReassignOrderType,
 ) => {
+  console.log("body>>", body);
   try {
     const rsp = await reassignOrderByRiderId(orderId, body);
 

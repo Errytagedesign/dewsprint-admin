@@ -55,6 +55,8 @@ export const getStatusColors = (status: string) => {
       "confirmed",
       "arrived",
       "delivered",
+      "credit",
+      "succeeded",
     ].includes(statusLower)
   ) {
     return "success";
@@ -68,6 +70,7 @@ export const getStatusColors = (status: string) => {
       "cancelled",
       "failed",
       "refunded",
+      "debit",
     ]?.includes(statusLower)
   ) {
     return "failed";

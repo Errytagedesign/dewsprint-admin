@@ -16,7 +16,6 @@ import {
   TableStatus,
 } from "@/components/ui/tableComponent/tabelComps";
 import { UserDataTypes } from "@/types/auth";
-import { ITransaction } from "@/types/transactions";
 import { CustomerType } from "@/types/customers";
 import { ReactNode } from "react";
 import { CustomerAction } from "@/components/main/customer/customerAction";
@@ -27,54 +26,57 @@ import {
 } from "@/components/main/riders/riderAction";
 import { OrderType } from "@/types/orders";
 import { OrdersAction } from "@/components/main/orders/ordersAction";
+import { TransactionType } from "@/types/transactions";
 
-export const transactionColData: Column<ITransaction>[] = [
+export const transactionColData: Column<TransactionType>[] = [
   {
     title: "Name",
-    key: "customer",
+    key: "rider",
     render: (_, record) => (
-      <FileImage
-        url={record?.customer?.user?.imageUrl as string}
-        userName={`${record?.customer?.user?.fullName}`}
-        email={record?.customer?.user?.email}
-      />
+      <>
+        {record?.rider ? (
+          <FileImage
+            url={record?.rider?.profilePhotoUrl}
+            userName={`${record?.rider?.name}`}
+            email={record?.rider?.email}
+          />
+        ) : (
+          <FileImage
+            url={record?.user?.profilePhotoUrl}
+            userName={`${record?.user?.name}`}
+            email={record?.user?.email}
+          />
+        )}
+      </>
     ),
   },
   {
     title: "Ref.",
     key: "reference",
-    render: (_, record) => <>{record?.reference}</>,
+    render: (_, record) => <TableID id={record?.reference} length={20} />,
   },
   {
     title: "Type",
     key: "type",
-    render: (_, record) => (
-      <span className="capitalize">{record?.type?.split("_")?.join(" ")}</span>
-    ),
+    render: (_, record) => <TableStatus status={record?.type} />,
   },
 
   {
     title: "Amount",
     key: "amount",
-    render: (_, record) => (
-      <>${formatNumInThousands(Number(record?.amount) / 100)}</>
-    ),
+    render: (_, record) => <>￡{record?.amount}</>,
   },
 
   {
     title: "Date",
-    key: "created_date",
-    render: (_, record) => <TableDate date={record?.created_date} />,
+    key: "createdAt",
+    render: (_, record) => <TableDate date={record?.createdAt} />,
   },
 
   {
     title: "Status",
     key: "status",
-    render: (_, { status }) => (
-      <div className="flex">
-        <span className={`${getStatusColors(status)} `}>{status}</span>
-      </div>
-    ),
+    render: (_, { status }) => <TableStatus status={status} />,
   },
 ];
 

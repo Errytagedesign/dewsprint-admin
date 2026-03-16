@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, use } from "react";
 import { Metadata } from "next";
 import Customers from "@/components/main/customer/customers";
 import { OrdersSearchParams } from "@/types/orders";
@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Customers",
 };
 
-export default async function page({
+export default function Page({
   searchParams,
 }: {
   searchParams: Promise<OrdersSearchParams>;
 }) {
-  const params = await searchParams;
+  const params = use(searchParams);
 
   return (
     <main className="roundedCard">

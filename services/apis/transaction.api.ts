@@ -1,21 +1,20 @@
+import { queryBuilder } from "@/utils/helpers";
 import { Api } from "./api";
-import { TransactionResponse } from "@/types/transactions.types";
+import { TransactionResponse } from "@/types/transactions";
 
 export const getTransactionsApi = async ({
-  page = 1,
-  limit = 10,
+  page = "1",
+  limit = "10",
   search,
-  type,
+  status,
 }: {
-  page?: number;
-  limit?: number;
+  page?: string;
+  limit?: string;
   search?: string;
-  type?: string;
+  status?: string;
 }) => {
   return Api.get<TransactionResponse>(
-    `/wallet/transaction/all?page=${page}&limit=${limit}${
-      type !== "" && type !== "all" && type !== undefined ? `&type=${type}` : ""
-    }${search ? `&search=${search}` : ""}`,
+    `/admin/transactions?${queryBuilder({ page, limit, search: String(search), status: String(status) })}`,
     true,
   );
 };

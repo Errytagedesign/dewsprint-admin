@@ -1,4 +1,5 @@
 import { ApiResponse } from "./auth";
+import { PaginationType } from "./global";
 
 export type VehicleTypes = "BICYCLE" | "MOTORCYCLE" | "CAB" | "TRUCK";
 
@@ -27,12 +28,7 @@ export type RidersType = {
 export type RidersResponse = ApiResponse & {
   data: {
     items: RidersType[];
-    pagination: {
-      page: number;
-      limit: number;
-      total: number;
-      totalPages: number;
-    };
+    pagination: PaginationType;
   };
 };
 

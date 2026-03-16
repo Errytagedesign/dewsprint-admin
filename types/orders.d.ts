@@ -1,6 +1,7 @@
 import { UserDataTypes } from "./auth";
 import { ApiResponse } from "./auth.types";
 import { Customer } from "./customers.types";
+import { PaginationType } from "./global";
 import { SubscriptionProps } from "./subscriptions.types";
 import { ITransaction } from "./transactions.types";
 
@@ -59,12 +60,7 @@ export type OrderType = {
 export type OrderResponse = ApiResponse & {
   data: {
     orders: OrderType[];
-    pagination: {
-      page: number;
-      limit: number;
-      total: number;
-      totalPages: number;
-    };
+    pagination: PaginationType;
   };
 };
 

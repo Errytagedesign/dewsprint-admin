@@ -13,16 +13,14 @@ import { OrderStatusType, OrderType } from "@/types/orders";
 import { handleError, handleSuccess } from "@/utils/helpers";
 import React, { useState, useTransition } from "react";
 import { IoIosMore } from "react-icons/io";
-import { filterData } from "./ordersLayout";
 import { DialogClose, DialogFooter } from "@/components/ui/modals/dialog";
 import {
   reassignOrderByRiderIdAction,
   updateOrderStatusByIdAction,
 } from "@/libs/actions/order.actions";
-import { AssignRiderList } from "./assignRider";
 import { UserDataTypes } from "@/types/auth";
 
-export const OrdersAction = ({ data }: { data: OrderType }) => {
+export const TransactionsAction = ({ data }: { data: OrderType }) => {
   const [isPending, startTransition] = useTransition();
   const { isOpen, openModal, closeModal } = useModalContext();
 
@@ -90,79 +88,6 @@ export const OrdersAction = ({ data }: { data: OrderType }) => {
           </li>
         </ul>
       </PopoverWrapper>
-
-      {isOpen[`status-${data?.id}`] && (
-        <ModalWrappers
-          id={`status-${data?.id}`}
-          title="Change Order Status"
-          subtitle="Are you sure you want to change this order status?"
-        >
-          <div className="space-y-4">
-            <SelectInput
-              name="status"
-              placeholder="Order Status"
-              options={filterData}
-              keyPropertyName="title"
-              valuePropertyName="value"
-              itemPropertyName="title"
-              selected={status}
-              onChange={(e) => setStatus(e)}
-              className="!h-[38px] !w-full min-w-40 !rounded-lg !px-3 !py-2"
-            />
-
-            <DialogFooter className="!grid grid-cols-1 gap-3 md:grid-cols-2">
-              <DialogClose asChild>
-                <Button className="outline-btn">Cancel</Button>
-              </DialogClose>
-              <Button
-                className="pry-btn"
-                onClick={handleOrderStatusUpdate}
-                loading={isPending}
-              >
-                Change Status
-              </Button>
-            </DialogFooter>
-          </div>
-        </ModalWrappers>
-      )}
-
-      {isOpen[`reassign-${data?.id}`] && (
-        <ModalWrappers
-          id={`reassign-${data?.id}`}
-          title="Re-assign Order"
-          subtitle="Are you sure you want to re-assign this order?"
-        >
-          <div className="space-y-4">
-            <AssignRiderList
-              selectedRider={rider}
-              handleSelectUsers={setRider}
-            />
-
-            <textarea
-              name="reason"
-              id="reason"
-              className="form-controls"
-              value={reason}
-              placeholder="Enter re-assign reasons"
-              rows={4}
-              onChange={(e) => setReason(e.target.value)}
-            />
-
-            <DialogFooter className="!grid grid-cols-1 gap-3 md:grid-cols-2">
-              <DialogClose asChild>
-                <Button className="outline-btn">Cancel</Button>
-              </DialogClose>
-              <Button
-                className="pry-btn"
-                onClick={handleReassignOrder}
-                loading={isPending}
-              >
-                Submit
-              </Button>
-            </DialogFooter>
-          </div>
-        </ModalWrappers>
-      )}
     </>
   );
 };

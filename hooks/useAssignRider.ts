@@ -3,21 +3,9 @@ import { useState } from "react";
 import useSearch from "./use-search";
 import { RidersResponse, RidersType } from "@/types/riders";
 
-export type SelectedUsersType = {
-  id: string;
-  email: string;
-};
-
 type UseAssignRiderProps = {
   status?: string;
   limit?: string;
-};
-
-type AssignRiderListItem = {
-  id: string;
-  fullName: string;
-  email: string;
-  imageUrl: string;
 };
 
 async function getRiders({
@@ -45,15 +33,6 @@ async function getRiders({
   }
 
   return json as RidersResponse;
-}
-
-function mapRiderToListItem(rider: RidersType): AssignRiderListItem {
-  return {
-    id: rider.id,
-    fullName: rider.name,
-    email: rider.email,
-    imageUrl: rider.profilePhotoUrl,
-  };
 }
 
 export const useAssignRider = ({
@@ -92,10 +71,7 @@ export const useAssignRider = ({
   });
 
   // Flatten all pages into a single array
-  const usersData =
-    data?.pages
-      .flatMap((page) => page?.data?.items ?? [])
-      .map(mapRiderToListItem) ?? [];
+  const ridersData = data?.pages.flatMap((page) => page?.data?.items ?? []);
 
   const loadMore = () => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -106,7 +82,7 @@ export const useAssignRider = ({
   return {
     toggle,
     setToggle,
-    usersData,
+    ridersData,
     isLoading,
     isFetchingNextPage,
     loadMore,

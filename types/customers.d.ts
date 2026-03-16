@@ -1,4 +1,5 @@
 import { ApiResponse } from "./auth";
+import { PaginationType } from "./global";
 
 export type Wallet = {
   id: string;
@@ -27,12 +28,7 @@ export type CustomerType = {
 export type CustomerResponse = ApiResponse & {
   data: {
     items: CustomerType[];
-    pagination: {
-      page: number;
-      limit: number;
-      total: number;
-      totalPages: number;
-    };
+    pagination: PaginationType;
   };
 };
 

@@ -6,10 +6,16 @@ import { formatDate, formatTime, getStatusColors } from "@/utils/helpers";
 import TableComponent, { Column } from "./tableComponent";
 import { AllAssets } from "@/types/global";
 
-export const TableID = ({ id }: { id: string }) => {
+export const TableID = ({
+  id,
+  length = 10,
+}: {
+  length?: number;
+  id: string;
+}) => {
   return (
     <div className="flex items-center gap-1">
-      {id?.slice(0, 10)}...
+      {id?.slice(0, length)}...
       <CopyToClipboardBtn id={id} valueToCopy={id} />
     </div>
   );

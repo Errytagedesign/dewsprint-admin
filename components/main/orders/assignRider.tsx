@@ -4,23 +4,19 @@ import EmailSaerch from "@/components/ui/emailSaerch";
 import { EmptyState } from "@/components/ui/emptyUI";
 import FileImage from "@/components/ui/fileImage";
 import TableLoading from "@/components/ui/skeleton/tableLoading";
-import { SelectedUsersType, useAssignRider } from "@/hooks/useAssignRider";
+import { useAssignRider } from "@/hooks/useAssignRider";
+import { UserDataTypes } from "@/types/auth";
 import React from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
- 
 
 type RiderListProps = {
-  selected?: string;
-  selectedUsers: SelectedUsersType[];
-  handleSelectUsers: (data: SelectedUsersType) => void;
-  removeSelectedUsers: (email: string) => void;
+  selectedRider: Partial<UserDataTypes>;
+  handleSelectUsers: (data: Partial<UserDataTypes>) => void;
 };
 
-export const RiderList = ({
-  selected,
-  selectedUsers,
+export const AssignRiderList = ({
+  selectedRider,
   handleSelectUsers,
-  removeSelectedUsers,
 }: RiderListProps) => {
   const {
     toggle,
@@ -28,35 +24,20 @@ export const RiderList = ({
     error,
     isPending,
     isLoading,
-    usersData,
+    ridersData,
     hasNextPage,
     loadMore,
     isFetchingNextPage,
-    data,
   } = useAssignRider();
- 
+
   return (
     <article className="relative">
       <div
-        className={`peer text-grey-600 placeholder:text-grey-400 disabled:bg-grey-100 size-full w-full rounded-[4px] border bg-transparent px-[18px] py-3.5 font-sans text-sm transition-all duration-300 outline-none focus-within:py-[18px] focus-within:pb-2.5 focus:py-[18px] focus:pb-2.5 disabled:cursor-not-allowed border-grey-200 flex items-center justify-between`}
+        className={`peer text-grey-600 placeholder:text-grey-400 disabled:bg-grey-100 border-grey-200 flex size-full w-full items-center justify-between rounded-[4px] border bg-transparent px-[18px] py-3.5 font-sans text-sm transition-all duration-300 outline-none focus-within:py-[18px] focus-within:pb-2.5 focus:py-[18px] focus:pb-2.5 disabled:cursor-not-allowed`}
         onClick={() => setToggle(!toggle)}
       >
         <div className="flex-1">
-          {selectedUsers?.length === 0 ? (
-            <p>{selected ?? "Recipient"}</p>
-          ) : (
-            <ul className="flex flex-wrap items-center gap-2">
-              {selectedUsers?.map(({ email }, idx) => (
-                <li
-                  key={idx}
-                  className="bg-grey-100 !text-grey-800 flex cursor-pointer items-center gap-2 rounded-lg p-2 !text-xs"
-                  onClick={() => removeSelectedUsers(email)}
-                >
-                  {email}
-                </li>
-              ))}
-            </ul>
-          )}
+          <p>{selectedRider?.name ?? "Select a Rider"}</p>
         </div>
 
         {toggle ? (
@@ -78,19 +59,24 @@ export const RiderList = ({
             />
           ) : (
             <ul className="divide-Line !space-y-3 divide-y">
-           
-
               <EmailSaerch
                 placeholder="Search by name, email address or username"
                 className="!mb-5 flex-1"
               />
-              {usersData?.map(({ id, fullName, email, imageUrl }) => (
+              {ridersData?.map(({ id, name, email, profilePhotoUrl }) => (
                 <li
                   key={id}
-                  className="cursor-pointer pb-3"
-                  onClick={() => handleSelectUsers({ id, email })}
+                  className={`${selectedRider?.id === id ? "bg-grey-100 rounded-2xl" : ""} cursor-pointer p-3`}
+                  onClick={() => {
+                    handleSelectUsers({ id, name });
+                    setToggle(!toggle);
+                  }}
                 >
-                  <FileImage url={imageUrl} userName={fullName} email={email} />
+                  <FileImage
+                    url={profilePhotoUrl}
+                    userName={name}
+                    email={email}
+                  />
                 </li>
               ))}
 
@@ -112,5 +98,3 @@ export const RiderList = ({
     </article>
   );
 };
-
- 

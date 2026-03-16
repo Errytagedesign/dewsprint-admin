@@ -5,6 +5,7 @@ import {
   RiderIcon,
 } from "@/public/svgs/svgs";
 import { TbTruckDelivery } from "react-icons/tb";
+import { GrTransaction } from "react-icons/gr";
 
 export const SidebarData = [
   {
@@ -28,6 +29,11 @@ export const SidebarData = [
     icon: <TbTruckDelivery size={24} />,
     title: "Orders",
     url: "/orders",
+  },
+  {
+    icon: <GrTransaction size={24} />,
+    title: "Transactions",
+    url: "/transactions",
   },
 
   {

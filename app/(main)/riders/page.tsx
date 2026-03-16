@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, use } from "react";
 import { Metadata } from "next";
 import { OrdersSearchParams } from "@/types/orders";
 import TableSkeleton from "@/components/ui/tableComponent/tableSkeleton";
@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   title: "Riders",
 };
 
-export default async function page({
+export default function Page({
   searchParams,
 }: {
   searchParams: Promise<OrdersSearchParams>;
 }) {
-  const params = await searchParams;
+  const params = use(searchParams);
 
   return (
     <main className="roundedCard">
