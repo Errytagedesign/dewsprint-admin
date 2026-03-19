@@ -10,7 +10,7 @@ import { UserDataTypes } from "@/types/auth";
 
 const USER_SESSION_KEY = "dewsprint-session";
 const EXPIRY_TIME =
-  process.env.NODE_ENV === "development" ? 2 * 60 * 60 * 1000 : 5 * 60 * 1000;
+  process.env.NODE_ENV === "development" ? 2 * 60 * 60 * 1000 : 30 * 60 * 1000;
 
 const secretKey = process.env.SECRET_KEY!;
 
