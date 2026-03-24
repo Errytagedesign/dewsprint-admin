@@ -291,3 +291,49 @@ export const ordersColData: Column<OrderType & { actions?: ReactNode }>[] = [
     render: (_, record) => <OrdersAction data={record} />,
   },
 ];
+
+export const riderOrdersColData: Column<OrderType>[] = [
+  {
+    title: "Customer",
+    key: "user",
+    render: (_, record) => (
+      <FileImage
+        url={record?.user?.profilePhotoUrl as string}
+        userName={record?.user?.name}
+        email={record?.user?.email}
+      />
+    ),
+  },
+
+  {
+    title: "Tracking ID",
+    key: "trackingCode",
+    render: (_, record) => <TableID id={record?.trackingCode} />,
+  },
+  {
+    title: "Distance",
+    key: "distanceKm",
+    render: (_, record) => (
+      <span className="bg-grey-100 text-grey-500 rounded-2xl px-3 py-2">
+        {record?.distanceKm}km
+      </span>
+    ),
+  },
+  {
+    title: "Fee",
+    key: "totalFee",
+    render: (_, record) => <>￡{record?.totalFee}</>,
+  },
+
+  {
+    title: "Status",
+    key: "status",
+    render: (_, { status }) => <TableStatus status={status} />,
+  },
+
+  {
+    title: "Date",
+    key: "createdAt",
+    render: (_, { createdAt }) => <TableDate date={createdAt} />,
+  },
+];

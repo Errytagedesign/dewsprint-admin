@@ -55,6 +55,12 @@ export type OrderType = {
   rider: UserDataTypes;
   totalFee: number;
   createdAt: string;
+  distanceKm: number;
+  deliveryFee: number;
+  declaredValue: number;
+  serviceFee: number;
+  insuranceFee: number;
+  totalFee: number;
 };
 
 export type OrderResponse = ApiResponse & {

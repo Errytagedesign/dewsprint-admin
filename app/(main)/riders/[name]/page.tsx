@@ -1,14 +1,16 @@
+import RiderOrders from "@/components/main/riders/riderOrders";
 import RiderProfile from "@/components/main/riders/riderProfile";
 import { DocumentsTable } from "@/components/main/riders/riderTable";
 import { ErrorUI } from "@/components/ui/emptyUI";
 import GoBackBtn from "@/components/ui/goBackBtn";
+import TableSkeleton from "@/components/ui/tableComponent/tableSkeleton";
 import {
   getRiderDocumentsApi,
   getRidersByIdApi,
 } from "@/services/apis/riders.api";
 import { OrdersSearchParams } from "@/types/orders";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const generateMetadata = async ({
   params,
@@ -52,7 +54,14 @@ export default async function page({
       <RiderProfile rider={riderData} />
 
       <section className="roundedCard flex-1 p-4">
+        <h4>Documents</h4>
         <DocumentsTable data={riderDocs} />
+      </section>
+      <section className="roundedCard flex-1 p-4">
+        <h4>Orders</h4>
+        <Suspense fallback={<TableSkeleton columns={6} />}>
+          <RiderOrders params={param} />
+        </Suspense>
       </section>
     </main>
   );

@@ -2,11 +2,17 @@
 
 import TableComponent from "@/components/ui/tableComponent/tableComponent";
 import { usePaginationContext } from "@/context/paginateContext";
-import { riderDocsColData, ridersColData } from "@/utils/constants";
+import {
+  riderDocsColData,
+  riderOrdersColData,
+  ridersColData,
+} from "@/utils/constants";
 import React from "react";
 import { EmptyState } from "@/components/ui/emptyUI";
 import TableSkeleton from "@/components/ui/tableComponent/tableSkeleton";
 import { RiderDocsType, RidersType } from "@/types/riders";
+import { OrderType } from "@/types/orders";
+import TablePagination from "@/components/ui/tableComponent/tablePaginations";
 
 export const RiderTable = () => {
   const { data, isPending, searchValue, filterValue } = usePaginationContext();
@@ -68,5 +74,38 @@ export const DocumentsTable = ({ data }: { data: RiderDocsType[] }) => {
       data={data}
       containerClassName="mt-6"
     />
+  );
+};
+
+export const RiderOrderTable = () => {
+  const { data, isPending } = usePaginationContext();
+
+  const customerData = data?.assets as OrderType[];
+
+  if (customerData?.length === 0) {
+    return (
+      <EmptyState
+        title={`No Order Datas`}
+        subTitle={`Order datas will appear here when they are available`}
+        className="min-h-[70vh]"
+      />
+    );
+  }
+
+  return (
+    <>
+      {isPending ? (
+        <TableSkeleton />
+      ) : (
+        <TableComponent
+          title="All Orders"
+          columns={riderOrdersColData}
+          data={data?.assets as OrderType[]}
+          containerClassName="mt-6"
+        />
+      )}
+
+      <TablePagination />
+    </>
   );
 };

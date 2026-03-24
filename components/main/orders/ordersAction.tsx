@@ -1,14 +1,8 @@
-import { WarningIcon } from "@/components/logout/logout";
 import Button from "@/components/ui/button";
-import ActionModals from "@/components/ui/modals/actionModals";
 import { ModalWrappers } from "@/components/ui/modals/modalWrappers";
 import PopoverWrapper from "@/components/ui/popover/popoverWrapper";
 import { SelectInput } from "@/components/ui/select/SelectInput";
 import { useModalContext } from "@/context/modalContext";
-import {
-  suspendCustomersAction,
-  unsuspendCustomerAction,
-} from "@/libs/actions/customer.actions";
 import { OrderStatusType, OrderType } from "@/types/orders";
 import { handleError, handleSuccess } from "@/utils/helpers";
 import React, { useState, useTransition } from "react";

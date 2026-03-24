@@ -28,7 +28,7 @@ export type TransactionType = {
 
 export type TransactionResponse = ApiResponse & {
   data: {
-    transactions: ITransaction[];
+    transactions: TransactionType[];
     pagination: PaginationType;
   };
 };

@@ -81,3 +81,8 @@ export type RiderDocsType = {
 export type RidersDocsRsp = ApiResponse & {
   data: { documents: RiderDocsType[] };
 };
+
+export type RidersDocsReviewType = {
+  status: "APPROVED" | "REJECTED";
+  rejectionReason?: string;
+};

@@ -3,11 +3,13 @@ import { Api } from "./api";
 import { queryBuilder } from "@/utils/helpers";
 import {
   RidersByIdRsp,
+  RidersDocsReviewType,
   RidersDocsRsp,
   RidersResponse,
   RidersStatRsp,
   RidersType,
 } from "@/types/riders";
+import { OrderResponse } from "@/types/orders";
 
 export const getRidersApi = ({
   status,
@@ -61,6 +63,32 @@ export const deleteRidersApi = (userId: string) => {
 export const getRiderDocumentsApi = (riderId: string) => {
   return Api.get<RidersDocsRsp>(
     `/admin/rider-documents/${riderId}/documents`,
+    true,
+  );
+};
+
+export const getRiderOrdersApi = ({
+  riderId,
+  page = "1",
+  limit = "10",
+}: {
+  riderId: string;
+  page?: string;
+  limit?: string;
+}) => {
+  return Api.get<OrderResponse>(
+    `/admin/riders/${riderId}/orders?page=${page}&limit=${limit}`,
+    true,
+  );
+};
+
+export const reviewRiderDocumentsApi = (
+  documentId: string,
+  body: RidersDocsReviewType,
+) => {
+  return Api.patch<RidersDocsReviewType, ApiResponse>(
+    `/admin/rider-documents/${documentId}/review`,
+    body,
     true,
   );
 };
